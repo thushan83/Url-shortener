@@ -1,4 +1,4 @@
-# url-shortner
+# url-shortener
 This is a springboot service that shortens a given URL and handles redirections for issued shorten URLs
 
 This comprise of two services and this follows mocroservices architecture
