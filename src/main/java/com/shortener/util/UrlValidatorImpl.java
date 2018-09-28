@@ -9,9 +9,13 @@ import org.springframework.stereotype.Component;
 public class UrlValidatorImpl implements UrlValidator{
 
 	@Override
-	public URL validateUrl(String url) throws MalformedURLException {
-		// TODO Auto-generated method stub
-		return null;
+	public URL getURL(String url){
+		URL urlObj = null;
+		try {
+			urlObj = new URL(url);
+		} catch (MalformedURLException e) {			
+			e.printStackTrace();
+		}
+		return urlObj;
 	}
-
 }

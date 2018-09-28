@@ -18,8 +18,8 @@ public class UrlShortenerController {
 		return null;
 	}
 	
-	@RequestMapping(value = "/[id]", method = RequestMethod.GET)
-	public void gotoUrl(String urlId) {
-		
+	@RequestMapping(value = "/get", method = RequestMethod.GET)
+	public String gotoUrl(String urlId) {
+		return "www.test.com";
 	}
 }
