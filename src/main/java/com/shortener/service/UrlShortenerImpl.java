@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.shortener.util.NumberSystem;
 import com.shortener.util.UrlValidator;
 
 @Component
@@ -13,6 +15,9 @@ public class UrlShortenerImpl implements UrlShortener{
 	
 	@Autowired
 	UrlValidator urlValidator;
+	
+	@Autowired
+	NumberSystem numberSystem;
 
 	@Override
 	public String shortenUrl(URL url) {

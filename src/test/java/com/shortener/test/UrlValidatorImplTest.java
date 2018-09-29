@@ -1,26 +1,18 @@
 package com.shortener.test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.net.MalformedURLException;
 import java.net.URL;
-
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.junit4.SpringRunner;
 import com.shortener.util.UrlValidator;
-import com.shortener.util.UrlValidatorImpl;
 
+@RunWith(SpringRunner.class)
 class UrlValidatorImplTest {
 
-	
+	@Autowired
 	UrlValidator urlValidator;
-	
-	@BeforeEach
-	void setUp() throws Exception {
-	  urlValidator = new UrlValidatorImpl();
-	}
 
 	@Test
 	void testInvalidUrl() {
