@@ -6,7 +6,7 @@ import java.util.ListIterator;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Symbols<String> extends ArrayList<String> {
+public class Symbols extends ArrayList<String> {
 
 	private static final long serialVersionUID = 1L;
 

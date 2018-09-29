@@ -1,25 +1,28 @@
-package com.shortener.test;
+package com.shortener.util.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.hibernate.validator.constraints.URL;
 import org.junit.jupiter.api.Test;
-
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 import com.shortener.util.Base70NumberSystem;
-import com.shortener.util.NumberSystem;
 
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
 class NumberSystemTest {
 	
-	NumberSystem numberSystem;
 
-	@BeforeEach
-	void setUp() throws Exception {
-	}
+	@Autowired
+	private Base70NumberSystem numberSystem;
+	
 
 	@Test
 	void base70NumberSystemTest1() {
 		String expected = "b";
-		numberSystem = new Base70NumberSystem();
 		String actual = numberSystem.getConvertedValue(1);
 		assertEquals(expected, actual);
 	}
@@ -27,19 +30,14 @@ class NumberSystemTest {
 	@Test
 	void base70NumberSystemTest2() {
 		String expected = "ahv";
-		numberSystem = new Base70NumberSystem();
 		String actual = numberSystem.getConvertedValue(583);
 		assertEquals(expected, actual);
 	}
-
 	
 	@Test
 	void base70NumberSystemTest3() {
 		String expected = "b";
-		numberSystem = new Base70NumberSystem();
 		String actual = numberSystem.getConvertedValue(1);
 		assertEquals(expected, actual);
 	}
-
-
 }

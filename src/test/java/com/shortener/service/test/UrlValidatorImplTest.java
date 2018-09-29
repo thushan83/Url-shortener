@@ -1,14 +1,16 @@
-package com.shortener.test;
+package com.shortener.service.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.net.URL;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.shortener.util.UrlValidator;
 
 @RunWith(SpringRunner.class)
+@SpringBootTest
 class UrlValidatorImplTest {
 
 	@Autowired
