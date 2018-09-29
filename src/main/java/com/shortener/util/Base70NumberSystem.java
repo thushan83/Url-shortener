@@ -9,16 +9,24 @@ import org.springframework.stereotype.Component;
 public class Base70NumberSystem implements NumberSystem {
 	
 	@Autowired
-	Symbols symbols;
+	private Symbols symbols;
+	
+	private Symbols convertedValues;
 	
 	public Base70NumberSystem(Symbols symbols) {
 		
+		convertedValues = new Symbols();
+				
 		for (char symbol = 'a'; symbol <= 'z'; symbol++) {
 		   symbols.add(String.valueOf(symbol));
 		}
 		
 		for (char symbol = 'A'; symbol <= 'Z'; symbol++) {
 		   symbols.add(String.valueOf(symbol));
+		}
+		
+		for (int symbol = 0; symbol <= 9; symbol++) {
+			symbols.add(String.valueOf(symbol));
 		}
 		
 		symbols.add("#");
@@ -32,25 +40,26 @@ public class Base70NumberSystem implements NumberSystem {
 	}
 	
 	
+	
 	private String devideBy70(int input) {
 		int result = input/70;
-		int mod = input%70;
-		Symbols convertedValue = new Symbols();
+		int mod = input%70;		
+		convertedValues.add(symbols.get(mod));
 		if(result == 0) {
-			return convertedValue.reverse();
-		}else {
-			convertedValue.add(symbols.get(mod));
+			return convertedValues.reverse();
+		}else {			
 			return devideBy70(result);
 		}
 	}
-		
+	
+	
 	@Override
 	public String getConvertedValue(int base10Number) {
-		if(base10Number > 0) {
-			return devideBy70(base10Number);
-		}else {
-			return null;
-		}
+		return devideBy70(base10Number);		
+	}
+	
+	public void reset() {
+		convertedValues.clear();
 	}
 
 }

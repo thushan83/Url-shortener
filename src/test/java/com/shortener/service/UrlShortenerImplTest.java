@@ -1,38 +1,48 @@
-package com.shortener.service.test;
-import static org.junit.jupiter.api.Assertions.*;
+package com.shortener.service;
+
+import static org.junit.Assert.assertEquals;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import com.shortener.service.UrlShortener;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class UrlShortenerImplTest {
-		
+public class UrlShortenerImplTest {
+
 	@Autowired
-	UrlShortener urlShortener;
-		
+	private UrlShortener urlShortener;
+
 	@Test
-	void testShortenUrlMethod() {
-		String expected = "https://shrt.lk/1";
+	public void testUrlShorten() {
+		String expected = "http://shrt.lk/a";
 		URL url = null;
 		try {
 			url = new URL("https://marketplace.eclipse.org/marketplace-client-intro?mpc_install=1794107");
 		} catch (MalformedURLException e) {
-			//do nothing
+			e.printStackTrace();
 		}
 		String actual = urlShortener.shortenUrl(url);
 		assertEquals(expected, actual);
 	}
 	
 	@Test
-	void testGetActualUrl() {
-		fail("Not yet implemented");
+	public void testUrlShorten2() {
+		String expected = "http://shrt.lk/b";
+		URL url = null;
+		try {
+			url = new URL("https://marketplace.eclipse.org/");
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		String actual = urlShortener.shortenUrl(url);
+		assertEquals(expected, actual);
 	}
 	
 }

@@ -13,6 +13,9 @@ public class UrlShortenerImpl implements UrlShortener{
 
 	private HashMap<String, URL> urlDictionary = new HashMap<>();
 	
+	private final String PROTOCOL = "http://";
+	private final String DOMAIN = "shrt.lk/";
+	
 	@Autowired
 	UrlValidator urlValidator;
 	
@@ -21,7 +24,9 @@ public class UrlShortenerImpl implements UrlShortener{
 
 	@Override
 	public String shortenUrl(URL url) {
-		return "";
+		String key = numberSystem.getConvertedValue(urlDictionary.size());
+		urlDictionary.put(key, url);
+		return PROTOCOL+DOMAIN+key;
 	}
 
 	@Override

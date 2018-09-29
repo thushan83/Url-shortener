@@ -1,22 +1,23 @@
-package com.shortener.util.test;
+package com.shortener.util;
 
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import com.shortener.util.Symbols;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class SymbolsTest {   
+public class SymbolsTest {
 	
-	@Autowired
-	Symbols symbols;
+
+	private Symbols symbols;
 
 	@Test
-	void reverseTest() {
+	public void reverseTest() {
+		symbols= new Symbols();
 		symbols.add("a");
 		symbols.add("b");
 		symbols.add("c");
@@ -25,5 +26,5 @@ class SymbolsTest {
 		String actual = symbols.reverse();
 		assertEquals(expected, actual);
 	}
+
 }
- 
