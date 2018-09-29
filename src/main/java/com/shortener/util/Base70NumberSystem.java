@@ -2,12 +2,14 @@ package com.shortener.util;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Base70NumberSystem implements NumberSystem {
 	
-	ArrayList<String> symbols = new ArrayList<String>();
+	@Autowired
+	Symbols<String> symbols;
 	
 	public Base70NumberSystem() {
 		
@@ -29,12 +31,18 @@ public class Base70NumberSystem implements NumberSystem {
 		symbols.add("=");
 	}
 	
+	private Symbols<String> reverse(){
+		return null;
+	}
+	
 	private String devideBy70(int input) {
 		int result = input/70;
 		int mod = input%70;
+		Symbols<String> convertedValue = new Symbols<String>();
 		if(result == 0) {
-			return symbols.get(mod);
+			return convertedValue.reverse();
 		}else {
+			convertedValue.add(symbols.get(mod));
 			return devideBy70(result);
 		}
 	}
