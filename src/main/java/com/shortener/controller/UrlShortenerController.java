@@ -1,11 +1,18 @@
 package com.shortener.controller;
 
+import java.net.URL;
+
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.shortener.model.UrlInfo;
 import com.shortener.service.UrlShortener;
+import com.shortener.util.UrlValidator;
 
 @RestController
 public class UrlShortenerController {
@@ -13,13 +20,22 @@ public class UrlShortenerController {
 	@Autowired
 	UrlShortener urlShortner;
 	
+	@Autowired
+	UrlValidator urlValidator;
+	
 	@RequestMapping(value = "/shorten", method = RequestMethod.POST)
-	public String shortedUrl() {
-		return null;
+	public UrlInfo shortedUrl(@RequestBody UrlInfo urlInfo) {
+		URL validURL = urlValidator.getURL(urlInfo.getOriginalURL());
+		if(validURL != null) {
+			urlInfo.setShortenedURL(urlShortner.shortenUrl(validURL));
+			return urlInfo;
+		}else {
+			return urlInfo;
+		}
 	}
 	
-	@RequestMapping(value = "/get", method = RequestMethod.GET)
-	public String gotoUrl(String urlId) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public String gotoUrl(@PathParam(value = "id") String id) {
 		return "www.test.com";
 	}
 }
