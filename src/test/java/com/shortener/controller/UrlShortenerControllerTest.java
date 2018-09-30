@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -15,6 +16,8 @@ import com.shortener.model.UrlInfo;
 import com.shortener.service.UrlShortener;
 import com.shortener.util.UnitTestHelper;
 import com.shortener.util.UrlValidator;
+import com.shortener.util.UrlValidatorImpl;
+
 import org.springframework.http.MediaType;
 
 @RunWith(SpringRunner.class)
@@ -29,7 +32,7 @@ public class UrlShortenerControllerTest {
 	
 	@MockBean
 	private UrlValidator urlValidator;
-	
+		
 	@Test
 	public void shortenUrlTest() throws Exception {
 		
@@ -38,7 +41,7 @@ public class UrlShortenerControllerTest {
 		
 		UrlInfo urlInfoExpected = new UrlInfo();
 		urlInfoExpected.setOriginalURL("http://www.google.lk");
-		urlInfoExpected.setShortenedURL("http://shrt.lk/a");
+		urlInfoExpected.setShortenedURL(null);
 		
 	    mockMvc.perform(post("/shorten")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
