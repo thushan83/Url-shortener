@@ -28,4 +28,8 @@ public class UnitTestHelper{
 		}
 		return null;
 	}
+	
+	public String getKeyFromShortenUrl(String shortenUrl) {
+		return shortenUrl.replace("http://shrt.lk/", "");
+	}
 }

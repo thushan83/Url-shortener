@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.shortener.util.UnitTestHelper;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -72,17 +74,33 @@ public class UrlShortenerImplTest {
 	@Test
 	public void testGetOriginalUrl() {
 		((UrlShortenerImpl)urlShortener).reset();
-		String expected = "https://marketplace.eclipse.org/123";
-		URL url = null;
+		((UrlShortenerImpl)urlShortener).reset();
+		String expected1 = "https://marketplace.eclipse.org/";
+		String expected2 = "https://marketplace.eclipse.org/marketplace-client-intro?mpc_install=1794107";
+		String expected3 = "https://marketplace.eclipse.org/marketplace-client-intro";
+		URL url1 = null, url2 = null, url3 = null;
+		
 		try {
-			url = new URL(expected);
+			url1 = new URL("https://marketplace.eclipse.org/");
+			url2 = new URL("https://marketplace.eclipse.org/marketplace-client-intro?mpc_install=1794107");
+			url3 = new URL("https://marketplace.eclipse.org/marketplace-client-intro");
+			
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-		urlShortener.shortenUrl(url);
-		String actual = urlShortener.getActualUrl("a");
-		assertEquals(expected, actual);
-	}
-	
-	
+		
+		String shortenUrl1 = urlShortener.shortenUrl(url1);
+		String shortenUrl2 = urlShortener.shortenUrl(url2);
+		String shortenUrl3 = urlShortener.shortenUrl(url3);
+		
+		String actual1 = urlShortener
+				.getActualUrl(UnitTestHelper.getInstance().getKeyFromShortenUrl(shortenUrl1));
+		assertEquals(expected1, actual1);
+		String actual2 = urlShortener
+				.getActualUrl(UnitTestHelper.getInstance().getKeyFromShortenUrl(shortenUrl2));
+		assertEquals(expected2, actual2);
+		String actual3 = urlShortener
+				.getActualUrl(UnitTestHelper.getInstance().getKeyFromShortenUrl(shortenUrl3));
+		assertEquals(expected3, actual3);
+	}	
 }
