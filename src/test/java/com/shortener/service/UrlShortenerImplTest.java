@@ -72,8 +72,28 @@ public class UrlShortenerImplTest {
 	}
 	
 	@Test
-	public void testGetOriginalUrl() {
+	public void testnSameShortenUrlForAUrlAlways() {
 		((UrlShortenerImpl)urlShortener).reset();
+		String expected = "http://shrt.lk/a";
+		URL url1 = null;
+		
+		try {
+			url1 = new URL("https://marketplace.eclipse.org/");
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		
+		String actual1 = urlShortener.shortenUrl(url1);
+		String actual2 = urlShortener.shortenUrl(url1);
+		String actual3 = urlShortener.shortenUrl(url1);
+				
+		assertEquals(expected, actual1);
+		assertEquals(expected, actual2);
+		assertEquals(expected, actual3);		
+	}
+	
+	@Test
+	public void testGetOriginalUrl() {
 		((UrlShortenerImpl)urlShortener).reset();
 		String expected1 = "https://marketplace.eclipse.org/";
 		String expected2 = "https://marketplace.eclipse.org/marketplace-client-intro?mpc_install=1794107";

@@ -5,13 +5,13 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.shortener.repository.UrlRepository;
 import com.shortener.util.NumberSystem;
 import com.shortener.util.UrlValidator;
 
 @Component
 public class UrlShortenerImpl implements UrlShortener{
-
-	private HashMap<String, URL> urlDictionary = null;
+	
 	private final String PROTOCOL = "http://";
 	private final String DOMAIN = "shrt.lk/";
 	
@@ -21,23 +21,22 @@ public class UrlShortenerImpl implements UrlShortener{
 	@Autowired
 	NumberSystem numberSystem;
 	
-	public UrlShortenerImpl() {
-		urlDictionary = new HashMap<>();
-	}
-
+	@Autowired
+	UrlRepository urlRepository;
+	
 	@Override
-	public String shortenUrl(URL url) {
-		String key = numberSystem.getConvertedValue(urlDictionary.size());
-		urlDictionary.put(key, url);
+	public String shortenUrl(URL url) {		
+		String key = numberSystem.getConvertedValue(urlRepository.getSize());
+		urlRepository.addNewUrl(key, url);
 		return PROTOCOL+DOMAIN+key;
 	}
 
 	@Override
 	public String getActualUrl(String key) { 
-		return urlDictionary.get(key).toString();
+		return urlRepository.getOriginalUrlByKey(key);
 	}
 	
 	public void reset() {
-		urlDictionary.clear();
+		urlRepository.clear();
 	}
 }
