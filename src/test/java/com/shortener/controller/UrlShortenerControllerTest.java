@@ -45,7 +45,7 @@ public class UrlShortenerControllerTest {
 		
 	    mockMvc.perform(post("/shorten")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content(UnitTestHelper.getInstance().objToJSON(urlInfo))
+                .content(UnitTestHelper.getInstance().objToJSON(urlInfo)) 
                 )
                 .andExpect(status().isOk())
                 .andExpect(content().string(UnitTestHelper.getInstance().objToJSON(urlInfoExpected)));

@@ -11,8 +11,7 @@ import com.shortener.util.UrlValidator;
 @Component
 public class UrlShortenerImpl implements UrlShortener{
 
-	private HashMap<String, URL> urlDictionary = new HashMap<>();
-	
+	private HashMap<String, URL> urlDictionary = null;
 	private final String PROTOCOL = "http://";
 	private final String DOMAIN = "shrt.lk/";
 	
@@ -21,6 +20,10 @@ public class UrlShortenerImpl implements UrlShortener{
 	
 	@Autowired
 	NumberSystem numberSystem;
+	
+	public UrlShortenerImpl() {
+		urlDictionary = new HashMap<>();
+	}
 
 	@Override
 	public String shortenUrl(URL url) {
@@ -30,9 +33,11 @@ public class UrlShortenerImpl implements UrlShortener{
 	}
 
 	@Override
-	public String getActualUrl(String key) {
-		// TODO Auto-generated method stub
-		return null;
+	public String getActualUrl(String key) { 
+		return urlDictionary.get(key).toString();
 	}
-
+	
+	public void reset() {
+		urlDictionary.clear();
+	}
 }

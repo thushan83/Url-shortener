@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.shortener.model.UrlInfo;
 import com.shortener.service.UrlShortener;
@@ -35,7 +36,8 @@ public class UrlShortenerController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public String gotoUrl(@PathParam(value = "id") String id) {
-		return "www.test.com";
+	public RedirectView gotoUrl(@PathParam(value = "id") String id) {
+		String originalUrl = urlShortner.getActualUrl(id);
+		return new RedirectView(originalUrl);
 	}
 }

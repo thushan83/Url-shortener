@@ -55,6 +55,7 @@ public class Base70NumberSystem implements NumberSystem {
 	
 	@Override
 	public String getConvertedValue(int base10Number) {
+		reset();
 		return devideBy70(base10Number);		
 	}
 	
