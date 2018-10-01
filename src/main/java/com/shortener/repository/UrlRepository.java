@@ -12,4 +12,6 @@ public interface UrlRepository {
 	
 	void clear();
 
+	String exists(String url);
+
 }
