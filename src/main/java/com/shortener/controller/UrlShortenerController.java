@@ -5,9 +5,11 @@ import java.net.URL;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -36,7 +38,8 @@ public class UrlShortenerController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public RedirectView gotoUrl(@PathParam(value = "id") String id) {
+	@ResponseBody
+	public RedirectView gotoUrl(@PathVariable String id) {
 		String originalUrl = urlShortner.getActualUrl(id);
 		return new RedirectView(originalUrl);
 	}

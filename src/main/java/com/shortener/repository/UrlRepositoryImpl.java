@@ -46,7 +46,7 @@ public class UrlRepositoryImpl implements UrlRepository {
 	public String getOriginalUrlByKey(String key) {
 		return urlDictionary.get(key).toString();
 	}
-
+	
 	@Override
 	public void clear() {
 		urlDictionary.clear();
