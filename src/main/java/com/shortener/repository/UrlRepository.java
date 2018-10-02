@@ -6,6 +6,7 @@ import com.shortener.model.ShortenUrlInfo;
 
 public interface UrlRepository extends MongoRepository<ShortenUrlInfo, String> {
 	
+		
 	default long getSize() {
 		return this.count();		
 	}
@@ -14,10 +15,7 @@ public interface UrlRepository extends MongoRepository<ShortenUrlInfo, String> {
 	
 	ShortenUrlInfo findBykey(String key);
 		
-	default void addNewUrl(String key, URL url) {
-		ShortenUrlInfo data = new ShortenUrlInfo();
-		data.setKey(key);
-		data.setOriginalURL(url.toString());
+	default void addNewUrl(ShortenUrlInfo data) {		
 		this.save(data);
 	}
 		

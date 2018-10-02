@@ -2,7 +2,12 @@ package com.shortener.service;
 
 import java.net.URL;
 import java.util.HashMap;
+
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import com.shortener.model.ShortenUrlInfo;
@@ -15,6 +20,7 @@ public class UrlShortenerImpl implements UrlShortener {
 
 	private final String PROTOCOL = "http://";
 	private final String DOMAIN = "shrt.lk/";
+	private static final String HASH_KEY = "URLS";
 
 	@Autowired
 	UrlValidator urlValidator;
@@ -24,14 +30,30 @@ public class UrlShortenerImpl implements UrlShortener {
 
 	@Autowired
 	UrlRepository urlRepository;
+	
+	@Autowired
+	RedisTemplate<String, ShortenUrlInfo> template;
+	
+	private HashOperations<String, String, ShortenUrlInfo> hashOperations;
+	
+	@PostConstruct
+	private void initialize() {
+		hashOperations = template.opsForHash();
+	}
 
 	@Override
 	public String shortenUrl(URL url) {
 		String key = numberSystem.getConvertedValue(urlRepository.getSize());
 		ShortenUrlInfo match =  urlRepository.findByoriginalURL(url.toString());
 
-		if (match == null) {			 
-			urlRepository.addNewUrl(key, url);
+		if (match == null) {
+			
+			ShortenUrlInfo data = new ShortenUrlInfo();
+			data.setKey(key);
+			data.setOriginalURL(url.toString());
+			
+			urlRepository.addNewUrl(data);
+			hashOperations.put(HASH_KEY, key, data);
 		}else {
 			key = match.getKey();
 		}
@@ -40,11 +62,13 @@ public class UrlShortenerImpl implements UrlShortener {
 
 	@Override
 	public String getActualUrl(String key) {
-		ShortenUrlInfo match = urlRepository.findBykey(key);
-		if(match != null)
+		ShortenUrlInfo match = hashOperations.get(HASH_KEY, key);
+		if(match == null) {
+			match = urlRepository.findBykey(key);
 			return match.getOriginalURL();
-		else
-		    return null; 
+		}else {
+		    return match.getOriginalURL();
+		}
 	}
 
 	public void reset() {
