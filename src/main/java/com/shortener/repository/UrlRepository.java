@@ -1,17 +1,27 @@
 package com.shortener.repository;
 
 import java.net.URL;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import com.shortener.model.ShortenUrlInfo;
 
-public interface UrlRepository {
+public interface UrlRepository extends MongoRepository<ShortenUrlInfo, String> {
 	
-	void addNewUrl(String key,URL url);
+	default long getSize() {
+		return this.count();		
+	}
 	
-	int getSize();
+	ShortenUrlInfo findByoriginalURL(String originalURL);
 	
-	String getOriginalUrlByKey(String key);
-	
-	void clear();
-
-	String exists(String url);
-
+	ShortenUrlInfo findBykey(String key);
+		
+	default void addNewUrl(String key, URL url) {
+		ShortenUrlInfo data = new ShortenUrlInfo();
+		data.setKey(key);
+		data.setOriginalURL(url.toString());
+		this.save(data);
+	}
+		
+	default void clear() {
+		this.deleteAll();
+	}
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.shortener.model.ShortenUrlInfo;
 import com.shortener.repository.UrlRepository;
 import com.shortener.util.NumberSystem;
 import com.shortener.util.UrlValidator;
@@ -27,18 +28,23 @@ public class UrlShortenerImpl implements UrlShortener {
 	@Override
 	public String shortenUrl(URL url) {
 		String key = numberSystem.getConvertedValue(urlRepository.getSize());
-		String existingKey = urlRepository.exists(url.toString());
-		if (existingKey == null) {
+		ShortenUrlInfo match =  urlRepository.findByoriginalURL(url.toString());
+
+		if (match == null) {			 
 			urlRepository.addNewUrl(key, url);
 		}else {
-			key = existingKey;
+			key = match.getKey();
 		}
 		return PROTOCOL + DOMAIN + key;
 	}
 
 	@Override
 	public String getActualUrl(String key) {
-		return urlRepository.getOriginalUrlByKey(key);
+		ShortenUrlInfo match = urlRepository.findBykey(key);
+		if(match != null)
+			return match.getOriginalURL();
+		else
+		    return null; 
 	}
 
 	public void reset() {

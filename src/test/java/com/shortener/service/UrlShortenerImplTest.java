@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,6 +21,11 @@ public class UrlShortenerImplTest {
 
 	@Autowired
 	private UrlShortener urlShortener;
+	
+	@AfterEach
+	public void cleanData() {
+		((UrlShortenerImpl)urlShortener).reset();
+	}
 
 	@Test
 	public void testUrlShorten() {

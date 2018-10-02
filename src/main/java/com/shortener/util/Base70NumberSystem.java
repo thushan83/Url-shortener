@@ -38,13 +38,11 @@ public class Base70NumberSystem implements NumberSystem {
 		symbols.add("&");
 		symbols.add("=");
 	}
-	
-	
-	
-	private String devideBy70(int input) {
-		int result = input/70;
-		int mod = input%70;		
-		convertedValues.add(symbols.get(mod));
+		
+	private String devideBy70(long input) {
+		long result = input/70;
+		long mod = input%70;		
+		convertedValues.add(symbols.get((int) mod));
 		if(result == 0) {
 			return convertedValues.reverse();
 		}else {			
@@ -54,7 +52,7 @@ public class Base70NumberSystem implements NumberSystem {
 	
 	
 	@Override
-	public String getConvertedValue(int base10Number) {
+	public String getConvertedValue(long base10Number) {
 		reset();
 		return devideBy70(base10Number);		
 	}
