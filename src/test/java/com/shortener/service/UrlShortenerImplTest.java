@@ -120,13 +120,13 @@ public class UrlShortenerImplTest {
 		String shortenUrl3 = urlShortener.shortenUrl(url3);
 		
 		String actual1 = urlShortener
-				.getActualUrl(UnitTestHelper.getInstance().getKeyFromShortenUrl(shortenUrl1));
+				.getOriginalUrl(UnitTestHelper.getInstance().getKeyFromShortenUrl(shortenUrl1));
 		assertEquals(expected1, actual1);
 		String actual2 = urlShortener
-				.getActualUrl(UnitTestHelper.getInstance().getKeyFromShortenUrl(shortenUrl2));
+				.getOriginalUrl(UnitTestHelper.getInstance().getKeyFromShortenUrl(shortenUrl2));
 		assertEquals(expected2, actual2);
 		String actual3 = urlShortener
-				.getActualUrl(UnitTestHelper.getInstance().getKeyFromShortenUrl(shortenUrl3));
+				.getOriginalUrl(UnitTestHelper.getInstance().getKeyFromShortenUrl(shortenUrl3));
 		assertEquals(expected3, actual3);
 	}	
 }

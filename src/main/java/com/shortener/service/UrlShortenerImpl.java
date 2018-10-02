@@ -61,7 +61,7 @@ public class UrlShortenerImpl implements UrlShortener {
 	}
 
 	@Override
-	public String getActualUrl(String key) {
+	public String getOriginalUrl(String key) {
 		ShortenUrlInfo match = hashOperations.get(HASH_KEY, key);
 		if(match == null) {
 			match = urlRepository.findBykey(key);

@@ -40,7 +40,7 @@ public class UrlShortenerController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public RedirectView gotoUrl(@PathVariable String id) {
-		String originalUrl = urlShortner.getActualUrl(id);
+		String originalUrl = urlShortner.getOriginalUrl(id);
 		return new RedirectView(originalUrl);
 	}
 }

@@ -1,13 +1,15 @@
 package com.shortener.model;
 
-import org.springframework.data.mongodb.core.mapping.Field;
+import java.io.Serializable;
 
-public class UrlInfo {	
+public class UrlInfo implements Serializable{	
 
-	@Field("ShortenedUrl")
+	private static final long serialVersionUID = 1L;
+
+
 	private String shortenedURL;
 	
-	@Field("OriginlUrl")
+
 	private String originalURL;
 
 	
