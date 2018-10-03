@@ -27,6 +27,13 @@ public class RedisConfiguration extends CachingConfigurerSupport {
         redisTemplate.setEnableTransactionSupport(true);
         return redisTemplate;
 	}
+	
+	@Bean
+	public RedisTemplate<String, Long> redisCounterTemplate() {
+        RedisTemplate<String, Long> redisTemplate = new RedisTemplate<String, Long>();
+        redisTemplate.setConnectionFactory(redisConnectionFactory());
+        return redisTemplate;
+	}
 
 	@Bean
 	public StringRedisTemplate stringRedisTemplate() {

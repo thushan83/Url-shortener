@@ -36,8 +36,8 @@ public class UrlShortenerControllerTest {
 	private UrlValidator urlValidator;
 	
 	@AfterEach
-	public void clean() {
-	    ((UrlShortenerImpl)urlShortener).reset();
+	private void clean() {
+		((UrlShortenerImpl)urlShortener).reset();
 	}
 		
 	@Test
