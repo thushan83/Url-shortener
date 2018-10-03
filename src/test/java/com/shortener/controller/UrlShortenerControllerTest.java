@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import com.shortener.model.UrlInfo;
 import com.shortener.service.UrlShortener;
-import com.shortener.service.UrlShortenerImpl;
+import com.shortener.service.UrlShortenerMongoRedisImpl;
 import com.shortener.util.UnitTestHelper;
 import com.shortener.util.UrlValidator;
 import com.shortener.util.UrlValidatorImpl;
@@ -37,7 +37,7 @@ public class UrlShortenerControllerTest {
 	
 	@AfterEach
 	private void clean() {
-		((UrlShortenerImpl)urlShortener).reset();
+		((UrlShortenerMongoRedisImpl)urlShortener).reset();
 	}
 		
 	@Test

@@ -24,12 +24,12 @@ public class UrlShortenerImplTest {
 	
 	@AfterEach
 	public void cleanData() {
-		((UrlShortenerImpl)urlShortener).reset();
+		((UrlShortenerBase)urlShortener).reset();
 	}
 
 	@Test
 	public void testUrlShorten() {
-		((UrlShortenerImpl)urlShortener).reset();
+		((UrlShortenerBase)urlShortener).reset();
 		String expected = "http://shrt.lk/a";
 		URL url = null;
 		try {
@@ -43,7 +43,7 @@ public class UrlShortenerImplTest {
 	
 	@Test
 	public void testUrlShorten2() {
-		((UrlShortenerImpl)urlShortener).reset();
+		((UrlShortenerBase)urlShortener).reset();
 		String expected = "http://shrt.lk/b";
 		URL url1 = null, url2 = null;
 		try {
@@ -60,7 +60,7 @@ public class UrlShortenerImplTest {
 	
 	@Test
 	public void testUrlShorten3() {
-		((UrlShortenerImpl)urlShortener).reset();
+		((UrlShortenerBase)urlShortener).reset();
 		String expected = "http://shrt.lk/c";
 		URL url1 = null, url2 = null, url3 = null;
 		try {
@@ -79,7 +79,7 @@ public class UrlShortenerImplTest {
 	
 	@Test
 	public void testnSameShortenUrlForAUrlAlways() {
-		((UrlShortenerImpl)urlShortener).reset();
+		((UrlShortenerBase)urlShortener).reset();
 		String expected = "http://shrt.lk/a";
 		URL url1 = null;
 		
@@ -100,7 +100,7 @@ public class UrlShortenerImplTest {
 	
 	@Test
 	public void testGetOriginalUrl() {
-		((UrlShortenerImpl)urlShortener).reset();
+		((UrlShortenerBase)urlShortener).reset();
 		String expected1 = "https://marketplace.eclipse.org/";
 		String expected2 = "https://marketplace.eclipse.org/marketplace-client-intro?mpc_install=1794107";
 		String expected3 = "https://marketplace.eclipse.org/marketplace-client-intro";
