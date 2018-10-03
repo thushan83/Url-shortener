@@ -1,6 +1,5 @@
 package com.shortener.repository;
 
-import java.net.URL;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import com.shortener.model.ShortenUrlInfo;
 

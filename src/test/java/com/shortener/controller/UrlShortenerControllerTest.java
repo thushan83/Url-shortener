@@ -7,7 +7,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -18,7 +17,6 @@ import com.shortener.service.UrlShortener;
 import com.shortener.service.UrlShortenerMongoRedisImpl;
 import com.shortener.util.UnitTestHelper;
 import com.shortener.util.UrlValidator;
-import com.shortener.util.UrlValidatorImpl;
 
 import org.springframework.http.MediaType;
 
