@@ -34,7 +34,12 @@ public class UrlShortenerRedisImpl extends UrlShortenerBase implements UrlShorte
 			key = cacheHit.getKey();
 		}
 
-		return PROTOCOL + DOMAIN + key;
+		return baseUrl + key;
+	}
+
+	@Override
+	public void setBaseUrl(String baseUrl) {
+		super.baseUrl = baseUrl;
 	}
 
 }

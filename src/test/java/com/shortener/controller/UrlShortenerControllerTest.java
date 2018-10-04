@@ -3,9 +3,9 @@ package com.shortener.controller;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
- 
+
+import org.junit.After;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import com.shortener.model.UrlInfo;
 import com.shortener.service.UrlShortener;
+import com.shortener.service.UrlShortenerBase;
 import com.shortener.service.UrlShortenerMongoRedisImpl;
 import com.shortener.util.UnitTestHelper;
 import com.shortener.util.UrlValidator;
@@ -33,10 +34,6 @@ public class UrlShortenerControllerTest {
 	@MockBean
 	private UrlValidator urlValidator;
 	
-	@AfterEach
-	private void clean() {
-		((UrlShortenerMongoRedisImpl)urlShortener).reset();
-	}
 		
 	@Test
 	public void shortenUrlTest() throws Exception {
@@ -55,6 +52,11 @@ public class UrlShortenerControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(UnitTestHelper.getInstance().objToJSON(urlInfoExpected)));
 	
+	}
+	
+	@After
+	public void clean() {
+		//((UrlShortenerBase)urlShortener).reset();
 	}
 
 }

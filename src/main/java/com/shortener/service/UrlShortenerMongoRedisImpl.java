@@ -6,6 +6,11 @@ import org.springframework.stereotype.Component;
 import com.shortener.model.ShortenUrlInfo;
 import com.shortener.repository.UrlRepository;
 
+/**
+ * This implementation uses Redis as a cache and MongoDB as a persistancy layer
+ * 
+ * @author Thushan
+ */
 @Component
 public class UrlShortenerMongoRedisImpl extends UrlShortenerBase implements UrlShortener {
 
@@ -45,7 +50,7 @@ public class UrlShortenerMongoRedisImpl extends UrlShortenerBase implements UrlS
 			key = cacheHit.getKey();
 		}
 
-		return PROTOCOL + DOMAIN + key;
+		return baseUrl+ key;
 	}
 
 	@Override
@@ -56,13 +61,18 @@ public class UrlShortenerMongoRedisImpl extends UrlShortenerBase implements UrlS
 		if (match == null) {
 			match = urlRepository.findBykey(key);
 		}
-		
+
 		return match.getOriginalURL();
 	}
 
 	@Override
 	public void reset() {
 		super.reset();
-		urlRepository.clear();		
+		urlRepository.clear();
+	}
+
+	@Override
+	public void setBaseUrl(String baseUrl) {
+		this.baseUrl = baseUrl;
 	}
 }

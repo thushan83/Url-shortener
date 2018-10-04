@@ -5,8 +5,9 @@ import static org.junit.Assert.assertEquals;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,10 +23,11 @@ public class UrlShortenerImplTest {
 	@Autowired
 	private UrlShortener urlShortener;
 	
-	@AfterEach
-	public void cleanData() {
-		((UrlShortenerBase)urlShortener).reset();
+	@Before
+	public void before() {
+		urlShortener.setBaseUrl("http://shrt.lk/");
 	}
+	
 
 	@Test
 	public void testUrlShorten() {

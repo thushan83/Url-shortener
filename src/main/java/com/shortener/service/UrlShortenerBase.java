@@ -15,13 +15,12 @@ import com.shortener.util.NumberSystem;
 import com.shortener.util.UrlValidator;
 
 public class UrlShortenerBase {
-	
-	protected final String PROTOCOL = "http://";
-	protected final String DOMAIN = "shrt.lk/";
+		
 	protected static final String HASH_KEY = "URLS";
 	protected final String META_ENTRY_COUNT_KEY = "meta_entry_count_key";
 	protected long counter = 0;
 	protected HashOperations<String, String, ShortenUrlInfo> hashOperations;
+	protected String baseUrl;
 	
 	@Autowired
 	UrlValidator urlValidator;

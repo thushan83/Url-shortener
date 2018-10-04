@@ -1,6 +1,9 @@
 package com.shortener.controller;
 
 import java.net.URL;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,8 +27,11 @@ public class UrlShortenerController {
 	UrlValidator urlValidator;
 	
 	@RequestMapping(value = "/shorten", method = RequestMethod.POST)
-	public UrlInfo shortedUrl(@RequestBody UrlInfo urlInfo) {
+	public UrlInfo shortedUrl(@RequestBody UrlInfo urlInfo, HttpServletRequest request) {
 		URL validURL = urlValidator.getURL(urlInfo.getOriginalURL());
+		String baseUrl = String.format("%s://%s:%d/",request.getScheme()
+				,  request.getServerName(), request.getServerPort());
+		urlShortner.setBaseUrl(baseUrl);
 		if(validURL != null) {
 			urlInfo.setShortenedURL(urlShortner.shortenUrl(validURL));
 			return urlInfo;
