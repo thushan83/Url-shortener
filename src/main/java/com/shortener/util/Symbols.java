@@ -6,17 +6,25 @@ import java.util.ListIterator;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Symbols extends ArrayList<String> {
+public class Symbols  {
+	
+	ArrayList<String> symbols = new ArrayList<String>();		
 
-	private static final long serialVersionUID = 1L;
-
-	public String reverse(){
+	public String reverse(){		
 		
-		ListIterator<String> iterator = this.listIterator(size());
+		ListIterator<String> iterator = symbols.listIterator(symbols.size());
 		StringBuilder stringBuilder = new StringBuilder();
 		while(iterator.hasPrevious()){
 			stringBuilder.append(iterator.previous());
 		}
 		return (String) stringBuilder.toString();		
+	}
+
+	public void add(String value) {
+		symbols.add(value);
+	}
+
+	public String get(int index) {
+		return symbols.get(index);
 	}
 }

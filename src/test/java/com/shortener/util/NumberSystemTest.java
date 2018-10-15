@@ -19,7 +19,6 @@ public class NumberSystemTest {
 
 	@Test
 	public void base70NumberSystemTest1() {
-		numberSystem.reset();
 		String expected = "b";
 		String actual = numberSystem.getConvertedValue(1);
 		assertEquals(expected, actual);
@@ -27,7 +26,6 @@ public class NumberSystemTest {
 	
 	@Test
 	public void base70NumberSystemTest2() {
-		numberSystem.reset();
 		String expected = "a";
 		String actual = numberSystem.getConvertedValue(0);
 		assertEquals(expected, actual);
@@ -35,7 +33,6 @@ public class NumberSystemTest {
 	
 	@Test
 	public void base70NumberSystemTest3() {
-		numberSystem.reset();
 		String expected = "ix";
 		String actual = numberSystem.getConvertedValue(583);
 		assertEquals(expected, actual);
@@ -43,7 +40,6 @@ public class NumberSystemTest {
 	
 	@Test
 	public void base70NumberSystemTest4() {
-		numberSystem.reset();
 		String expected = "L+eu";
 		String actual = numberSystem.getConvertedValue(13000000);
 		assertEquals(expected, actual);
